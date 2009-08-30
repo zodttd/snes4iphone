@@ -1,0 +1,12 @@
+//
+// Prefix header for all source files of the 'ShoutOut' target in the 'ShoutOut' project
+//
+
+#ifdef __OBJC__
+	#import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+#endif
+
+#define WITH_INTERPRETER
+#define ARM_ARCH
+#define GP2X_BUILD
