@@ -1,0 +1,41 @@
+8
+
+dir
+544
+svn+ssh://zodttd@theiphoneproject.org/srv/iliberty/scast/ShoutOut.xcodeproj
+svn+ssh://zodttd@theiphoneproject.org/srv/iliberty
+
+
+
+2008-09-13T10:26:00.785872Z
+539
+zodttd
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+00a1d29a-c493-4cd2-8dbe-25e900feef9d
+
+project.pbxproj
+file
+
+
+
+
+2008-09-13T10:25:11.000000Z
+c6c8f1dd86a293a545e79bef3952fb46
+2008-09-13T10:26:00.785872Z
+539
+zodttd
+has-props
+
