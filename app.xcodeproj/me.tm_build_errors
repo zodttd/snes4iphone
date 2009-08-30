@@ -1,2 +1,0 @@
-2009-08-23 22|53|37.608 xcodebuild[37128:613] Unable to load platform at path /Developer/Platforms/Aspen.platform
-2009-08-23 22|53|38.696 xcodebuild[37128:613] warning: compiler 'com.apple.compilers.llvm.clang.1_0.analyzer' is based on missing compiler 'com.apple.compilers.llvm.clang.1_0.analyzer'
