@@ -32,9 +32,9 @@ static unsigned long newtouches[10];
 static unsigned long oldtouches[10];
 
 enum  { GP2X_UP=0x1,       GP2X_LEFT=0x4,       GP2X_DOWN=0x10,  GP2X_RIGHT=0x40,
-	GP2X_START=1<<8,   GP2X_SELECT=1<<9,    GP2X_L=1<<10,    GP2X_R=1<<11,
-	GP2X_A=1<<12,      GP2X_B=1<<13,        GP2X_X=1<<14,    GP2X_Y=1<<15,
-GP2X_VOL_UP=1<<23, GP2X_VOL_DOWN=1<<22, GP2X_PUSH=1<<27 };
+	      GP2X_START=1<<8,   GP2X_SELECT=1<<9,    GP2X_L=1<<10,    GP2X_R=1<<11,
+	      GP2X_A=1<<12,      GP2X_B=1<<13,        GP2X_X=1<<14,    GP2X_Y=1<<15,
+        GP2X_VOL_UP=1<<23, GP2X_VOL_DOWN=1<<22, GP2X_PUSH=1<<27 };
 
 extern float __audioVolume;
 extern volatile unsigned short BaseAddress[240*160];
@@ -152,7 +152,7 @@ void* app_Thread_Start(void* args)
 		{
 			if([SOApp.optionsView getCurrentScaling])
 			{
-				CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI / 2.0f); // = CGAffineTransformMakeTranslation(1.0, 1.0);
+				CGAffineTransform transform = CGAffineTransformMakeRotation(3.0 * M_PI / 2.0f); // = CGAffineTransformMakeTranslation(1.0, 1.0);
 				[screenLayer setAffineTransform:transform];
 				screenLayer.frame = CGRectMake(0.0f, 58.0f, 320.0f, 365.0f);
 				//[screenLayer setCenter:CGPointMake(240.0f,160.0f)];
@@ -160,7 +160,7 @@ void* app_Thread_Start(void* args)
 			}
 			else
 			{
-				CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI / 2.0f); // = CGAffineTransformMakeTranslation(1.0, 1.0);
+				CGAffineTransform transform = CGAffineTransformMakeRotation(3.0 * M_PI / 2.0f); // = CGAffineTransformMakeTranslation(1.0, 1.0);
 				[screenLayer setAffineTransform:transform];
 				screenLayer.frame = CGRectMake(48.0f, 112.0f, 224.0f, 256.0f);
 				//[screenLayer setCenter:CGPointMake(240.0f,160.0f)];
@@ -319,8 +319,8 @@ void* app_Thread_Start(void* args)
   			//pthread_join(main_tid, NULL);
   			[screenView removeFromSuperview];
   			[screenView release];
-  			[controllerImageView removeFromSuperview];
-  			[controllerImageView release];
+  			//[controllerImageView removeFromSuperview];
+  			//[controllerImageView release];
   			__emulation_run = 0;
   			__emulation_saving = 0;	
 #ifdef WITH_ADS
@@ -345,8 +345,8 @@ void* app_Thread_Start(void* args)
   			//pthread_join(main_tid, NULL);
   			[screenView removeFromSuperview];
   			[screenView release];
-  			[controllerImageView removeFromSuperview];
-  			[controllerImageView release];
+  			//[controllerImageView removeFromSuperview];
+  			//[controllerImageView release];
   			__emulation_run = 0;
   			__emulation_saving = 0;
 #ifdef WITH_ADS
@@ -366,8 +366,8 @@ void* app_Thread_Start(void* args)
   			//pthread_join(main_tid, NULL);
   			[screenView removeFromSuperview];
   			[screenView release];
-  			[controllerImageView removeFromSuperview];
-  			[controllerImageView release];
+  			//[controllerImageView removeFromSuperview];
+  			//[controllerImageView release];
   			__emulation_run = 0;
   			__emulation_saving = 0;
 #ifdef WITH_ADS
@@ -403,6 +403,7 @@ void* app_Thread_Start(void* args)
 			__emulation_run = 1;
 			screenView = [ [ScreenView alloc] initWithFrame: CGRectMake(0, 0, 320, 480)];
 			[self.view addSubview: screenView];
+			/*
 			controllerImageView = [ [ UIImageView alloc ] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"controller_hs%d.png", [SOApp.optionsView getCurrentSkin]]]];
 			controllerImageView.frame = CGRectMake(0.0f, 240.0f, 320.0f, 240.0f); // Set the frame in which the UIImage should be drawn in.
 			controllerImageView.userInteractionEnabled = NO;
@@ -411,6 +412,7 @@ void* app_Thread_Start(void* args)
 			[controllerImageView setOpaque:YES];
 			[controllerImageView setAlpha:((float)iphone_controller_opacity / 100.0f)];
 			[self.view addSubview: controllerImageView]; // Draw the image in self.view.
+			*/
 		}
 		else if (buttonIndex == 1)
 		{
@@ -422,6 +424,7 @@ void* app_Thread_Start(void* args)
 			__emulation_run = 1;
 			screenView = [ [ScreenView alloc] initWithFrame: CGRectMake(0, 0, 320, 480)];
 			[self.view addSubview: screenView];
+			/*
 			controllerImageView = [ [ UIImageView alloc ] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"controller_hs%d.png", [SOApp.optionsView getCurrentSkin]]]];
 			controllerImageView.frame = CGRectMake(0.0f, 240.0f, 320.0f, 240.0f); // Set the frame in which the UIImage should be drawn in.
 			controllerImageView.userInteractionEnabled = NO;
@@ -430,6 +433,7 @@ void* app_Thread_Start(void* args)
 			[controllerImageView setOpaque:YES];
 			[controllerImageView setAlpha:((float)iphone_controller_opacity / 100.0f)];
 			[self.view addSubview: controllerImageView]; // Draw the image in self.view.
+			*/
 		}
 		else if (buttonIndex == 2)
 		{
@@ -441,6 +445,7 @@ void* app_Thread_Start(void* args)
 			__emulation_run = 1;
 			screenView = [ [ScreenView alloc] initWithFrame: CGRectMake(0, 0, 320, 480)];
 			[self.view addSubview: screenView];
+			/*
 			controllerImageView = [ [ UIImageView alloc ] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"controller_fs%d.png", [SOApp.optionsView getCurrentSkin]]]];
 			controllerImageView.frame = CGRectMake(0.0f, 0.0f, 320.0f, 480.0f); // Set the frame in which the UIImage should be drawn in.
 			controllerImageView.userInteractionEnabled = NO;
@@ -449,6 +454,7 @@ void* app_Thread_Start(void* args)
 			[controllerImageView setOpaque:YES];
 			[controllerImageView setAlpha:((float)iphone_controller_opacity / 100.0f)];
 			[self.view addSubview: controllerImageView]; // Draw the image in self.view.
+			*/
 		}
 		else
 		{
@@ -460,6 +466,7 @@ void* app_Thread_Start(void* args)
 			__emulation_run = 1;
 			screenView = [ [ScreenView alloc] initWithFrame: CGRectMake(0, 0, 320, 480)];
 			[self.view addSubview: screenView];
+			/*
 			controllerImageView = [ [ UIImageView alloc ] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"controller_fs%d.png", [SOApp.optionsView getCurrentSkin]]]];
 			controllerImageView.frame = CGRectMake(0.0f, 0.0f, 320.0f, 480.0f); // Set the frame in which the UIImage should be drawn in.
 			[controllerImageView setOpaque:YES];
@@ -467,7 +474,8 @@ void* app_Thread_Start(void* args)
 			controllerImageView.userInteractionEnabled = NO;
 			controllerImageView.multipleTouchEnabled = NO;
 			controllerImageView.clearsContextBeforeDrawing = NO;
-			[self.view addSubview: controllerImageView]; // Draw the image in self.view.				
+			[self.view addSubview: controllerImageView]; // Draw the image in self.view.			
+			*/	
 		}
 #ifdef WITH_ADS		
     [SOApp.delegate pauseAdViews];

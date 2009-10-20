@@ -1,11 +1,3 @@
-//
-//  RomController.h
-//  ShoutOut
-//
-//  Created by Spookysoft on 9/6/08.
-//  Copyright Spookysoft 2008. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 extern void *app_Thread_Start(void *args);

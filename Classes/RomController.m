@@ -1,10 +1,3 @@
-//
-//  RomController.m
-//  ShoutOut
-//
-//  Created by Spookysoft on 9/6/08.
-//  Copyright Spookysoft 2008. All rights reserved.
-//
 #import "SOApplication.h"
 #import <pthread.h>
 

@@ -818,7 +818,7 @@ int main(int argc, char *argv[])
  	unsigned int i = 0;
 	unsigned int romrunning = 0;
 	int aim=0, done=0, skip=0, Frames=0, tick=0, efps=0, SaveFrames=0;
-	int Timer=0;
+	unsigned long Timer=0;
 	int action=0;
 	int romloaded=0;
 	char text[256];

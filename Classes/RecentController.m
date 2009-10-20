@@ -1,11 +1,3 @@
-//
-//  BookmarksController.m
-//  ShoutOut
-//
-//  Created by ME on 9/13/08.
-//  Copyright 2008 __MyCompanyName__. All rights reserved.
-//
-
 #import "SOApplication.h"
 
 

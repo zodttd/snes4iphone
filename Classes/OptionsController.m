@@ -1,11 +1,3 @@
-//
-//  OptionsController.m
-//  psx4iphone
-//
-//  Created by ME on 1/29/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
-
 #import "SOApplication.h"
 
 unsigned long gp2x_fps_debug = 0;

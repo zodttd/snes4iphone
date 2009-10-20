@@ -1,11 +1,3 @@
-//
-//  OptionsController.h
-//  psx4iphone
-//
-//  Created by ME on 1/29/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
-//
-
 #import <UIKit/UIKit.h>
 
 
