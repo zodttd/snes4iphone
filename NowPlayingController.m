@@ -139,7 +139,7 @@ void* app_Thread_Start(void* args)
 		{
 			if([SOApp.optionsView getCurrentScaling])
 			{
-				screenLayer.frame = CGRectMake(23.0f, 0.0f, 274.0f, 240.0f);
+				screenLayer.frame = CGRectMake(0.0f, 0.0f, 320.0f, 240.0f);
 				[ screenLayer setOpaque: YES ];
 			}
 			else
@@ -154,7 +154,7 @@ void* app_Thread_Start(void* args)
 			{
 				CGAffineTransform transform = CGAffineTransformMakeRotation(3.0 * M_PI / 2.0f); // = CGAffineTransformMakeTranslation(1.0, 1.0);
 				[screenLayer setAffineTransform:transform];
-				screenLayer.frame = CGRectMake(0.0f, 58.0f, 320.0f, 365.0f);
+				screenLayer.frame = CGRectMake(0.0f, 0.0f, 320.0f, 480.0f);
 				//[screenLayer setCenter:CGPointMake(240.0f,160.0f)];
 				[ screenLayer setOpaque:YES ];
 			}

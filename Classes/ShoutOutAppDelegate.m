@@ -49,6 +49,9 @@ extern unsigned long gp2x_pad_status;
 	navFrame.size.height = 460 - 49;
 	[navigationController view].frame = navFrame;
 
+  
+  [self switchToBrowse];
+  
 //	tabBar.selectedItem = 0;
 	// Configure and show the window
 	//[SOApp.nowPlayingView startEmu:"/var/mobile/Media/ROMs/GBA/Pokemon - Emerald Version (U) [f1] (Save Type).gba"];
@@ -59,7 +62,7 @@ extern unsigned long gp2x_pad_status;
 
 	[window makeKeyAndVisible];
 
-  [self switchToBrowse];
+  //[self switchToBrowse];
 
 	// Load ROMs
   [SOApp.romView startRootData:2.0f];
@@ -178,6 +181,32 @@ extern unsigned long gp2x_pad_status;
 	} else {
 		[[self navigationController] pushViewController:SOApp.optionsView animated:NO];
 	}
+}
+
+- (void)switchToWebBrowserView
+{
+	[[UIApplication sharedApplication] setStatusBarHidden:NO animated:NO];
+	[tabBar setHidden:NO];
+	CGRect navFrame = [navigationController view].frame;
+	navFrame.origin.y = 20;
+	navFrame.size.height = 460 - 49;
+	[navigationController view].frame = navFrame;
+	navigationController.navigationBarHidden = FALSE;
+	navigationController.navigationBar.hidden = FALSE;
+	
+	if ([[[self navigationController] viewControllers] containsObject:SOApp.webBrowserView]) 
+	{
+		[[self navigationController] popToViewController:SOApp.webBrowserView animated:NO];
+	} 
+	else
+	{
+		[[self navigationController] pushViewController:SOApp.webBrowserView animated:NO];
+	}
+}
+
+- (void)reloadROMs
+{
+  [SOApp.romView startRootData:2.0f];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

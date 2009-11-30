@@ -1,5 +1,5 @@
 VERSION=2.0
-COPT = -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${VERSION}.sdk/System/Library/Frameworks -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${VERSION}.sdk/System/Library/PrivateFrameworks -I../../ -I../../Classes/ -I../../Classes/AdMob/ -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/lib/gcc/arm-apple-darwin9/4.2.1/include -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${VERSION}.sdk  -L/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${VERSION}.sdk/usr/lib
+COPT = -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${VERSION}.sdk/System/Library/Frameworks -F/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${VERSION}.sdk/System/Library/PrivateFrameworks -I../../ -I../../Classes/ -I/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/lib/gcc/arm-apple-darwin9/4.2.1/include -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${VERSION}.sdk  -L/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS${VERSION}.sdk/usr/lib
 COPT += -march=armv6 -miphoneos-version-min=${VERSION} -I. -O3 -D__IPHONE__ -D_SNESPPC -DASM_SPC700 -DZLIB -DUNZIP_SUPPORT -DOLD_COLOUR_BLENDING -DUSE_SA1 -DSUPER_FX -DLSB_FIRST -DCPU_SHUTDOWN -DVAR_CYCLES
 COPT += -fnested-functions -funsigned-char -ffast-math -fexpensive-optimizations -ftemplate-depth-36 -mstructure-size-boundary=32 -falign-functions=32 -falign-loops -falign-labels -falign-jumps -finline -finline-functions -fno-builtin -fno-common -fomit-frame-pointer -fpeel-loops -fstrength-reduce -funroll-loops -fstrict-aliasing 
 GCC = /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/arm-apple-darwin9-gcc-4.2.1
@@ -24,7 +24,7 @@ OBJS += sa1.o sdd1.o sdd1emu.o snapshot.o soundux.o spc700.o srtc.o tile.o unzip
 # Dave's minimal SDK
 #
 OBJS += iphone_sdk.o iphone_menutile.o iphone_highlightbar.o iphone_menu_header.o 
-OBJS += ../../main.o ../../NowPlayingController.o ../../Classes/helpers.o   ../../Classes/OptionsController.o ../../Classes/RecentController.o ../../Classes/RomController.o ../../Classes/SaveStatesController.o ../../Classes/ShoutOutAppDelegate.o ../../Classes/SOApplication.o ../../Classes/TabBar.o 
+OBJS += ../../main.o ../../NowPlayingController.o ../../Classes/helpers.o   ../../Classes/OptionsController.o ../../Classes/RecentController.o ../../Classes/RomController.o ../../Classes/SaveStatesController.o ../../Classes/ShoutOutAppDelegate.o ../../Classes/SOApplication.o ../../Classes/TabBar.o ../../Classes/WebBrowserViewController.o
 
 
 #
@@ -33,7 +33,7 @@ OBJS += ../../main.o ../../NowPlayingController.o ../../Classes/helpers.o   ../.
 OBJS += main.o
 
 # Inopia's menu system, hacked for the GP2X under rlyeh's sdk
-PRELIBS = -lobjc \
+PRELIBS = -multiply_defined suppress -lobjc -fobjc-exceptions \
 	        -lpthread \
           -framework CoreFoundation \
           -framework Foundation \
@@ -45,8 +45,9 @@ PRELIBS = -lobjc \
           -framework AudioToolbox \
           -framework GraphicsServices \
           -framework OpenGLES \
-          -framework AddressBook ../../Classes/AdMob/libAdMobDevice.a ../../Classes/AdMob/MobClix.a ../../Classes/AdMob/MobClixAds.a ../../Classes/AdMob/MobClixBrowser.a ../../Classes/AdMob/MobClixFeedback.a -lsqlite3 -framework SystemConfiguration \
+          -framework AddressBook -lsqlite3 -framework SystemConfiguration \
           -lz \
+          -framework WebKit \
           -allow_stack_execute
 
 all: pocketsnes
@@ -98,7 +99,7 @@ pocketsnesd: $(OBJS)
 	$(GXX) $(COPT) $(OBJS) $(PRELIBS) -o $@
 
 pocketsnes: pocketsnesd
-	cp pocketsnesd snes4iphone
+	$(STRIP) pocketsnesd -o snes4iphone
 	
 tidy:
-	rm *.o ../../*.o ../../Classes/*.o ../../Classes/AdMob/*.o
+	rm *.o ../../*.o ../../Classes/*.o

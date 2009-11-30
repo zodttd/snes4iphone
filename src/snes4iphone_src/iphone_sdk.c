@@ -203,7 +203,7 @@ void gp_deinitGraphics(void)
 
 void gp_setFramebuffer(int flip, int sync)
 {
-	memcpy(screenbuffer, vrambuffer, 256*224*2);
+	//memcpy(screenbuffer, vrambuffer, 256*224*2);
 	updateScreen();
 }
 

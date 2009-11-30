@@ -2,7 +2,7 @@
 
 extern void *app_Thread_Start(void *args);
 
-@interface RomController : UIViewController < UITableViewDataSource, UITableViewDelegate > {
+@interface RomController : UIViewController < UIAlertViewDelegate, UITableViewDataSource, UITableViewDelegate > {
   NSMutableArray*         arrayOfCharacters;
   NSMutableDictionary*    objectsForCharacters;
 	IBOutlet UITableView*	  tableview;

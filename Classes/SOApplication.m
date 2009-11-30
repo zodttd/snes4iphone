@@ -6,4 +6,5 @@
 @synthesize saveStatesView;
 @synthesize recentView;
 @synthesize optionsView;
+@synthesize webBrowserView;
 @end

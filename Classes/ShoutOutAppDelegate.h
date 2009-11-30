@@ -25,6 +25,8 @@
 - (void)switchToNowPlaying;
 - (void)switchToRecent;
 - (void)switchToOptions;
+- (void)switchToWebBrowserView;
+- (void)reloadROMs;
 #ifdef WITH_ADS
 - (AltAds*)getAdViewWithIndex:(int)index;
 - (void)pauseAdViews;

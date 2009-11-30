@@ -17,9 +17,14 @@ static const int section_offset = 0;
 
 @implementation RomController
 
-- (void)awakeFromNib {
+- (void)awakeFromNib 
+{
 	self.navigationItem.hidesBackButton = YES;
 	self.navigationItem.prompt = @"www.zodttd.com";
+	
+	UIBarButtonItem *moreButton = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(searchButtonClicked)];
+	self.navigationItem.rightBarButtonItem = moreButton;
+	[moreButton release];
 	
 	adNotReceived = 0;
   arrayOfCharacters = [[NSMutableArray alloc] init];
@@ -28,6 +33,30 @@ static const int section_offset = 0;
   alphabetIndex = [[NSArray arrayWithArray:
      [@"A|B|C|D|E|F|G|H|I|J|K|L|M|N|O|P|Q|R|S|T|U|V|W|X|Y|Z|#"
            componentsSeparatedByString:@"|"]] retain];
+}
+
+- (void)purchaseButtonClicked
+{
+  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.rockyourphone.com/index.php/checkout/cart/add/uenc/,/product/200/"]]; 
+}
+
+- (void)searchButtonClicked
+{
+  if(![[NSFileManager defaultManager] fileExistsAtPath:@"/Applications/snes4iphone.app/searched"])
+  {
+    FILE* fp = fopen("/Applications/snes4iphone.app/searched", "w");
+    if(fp)
+    {
+      fclose(fp);
+    }
+  	UIAlertView* alertView=[[UIAlertView alloc] initWithTitle:nil
+                      message:@"This interface allows you to download .zip and SNES ROM files directly from the web into the correct directory for snes4iphone. You may only download ROMS you legally own. snes4iphone and ZodTTD are not affiliated/associated with any of these sites. Please do not contact us for support downloading roms. Simply browse a site, find a ROM you own, and press download - the file will download and will be available to play."
+  										delegate:self cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil];
+  	[alertView show];
+  	[alertView release];
+  }
+  [SOApp.delegate switchToWebBrowserView];
 }
 
 - (void)startRootData:(float)secs
@@ -53,6 +82,7 @@ static const int section_offset = 0;
 
 - (void)refreshData:(NSString*)path 
 {
+  unsigned long numFiles = 0;
   NSString* prevPath;
 	[arrayOfCharacters removeAllObjects];
 	[objectsForCharacters removeAllObjects];
@@ -120,6 +150,7 @@ static const int section_offset = 0;
 		  }
 		  
       [arrayOfIndexedFiles[objectIndex] addObject:[dirContents objectAtIndex:i]];
+      numFiles++;
 		}
   }
 
@@ -135,11 +166,30 @@ static const int section_offset = 0;
     [arrayOfIndexedFiles[i] release];
   }
   
+  if(numFiles == 0)
+  {
+  	UIAlertView* alertView=[[UIAlertView alloc] initWithTitle:nil
+                      message:@"No ROMs found.\nWould you like to find them?\n\n"
+  										delegate:self cancelButtonTitle:nil
+                      otherButtonTitles:@"NO",@"YES",nil];
+  	[alertView show];
+  	[alertView release];
+  }
+  
   [tableview reloadData];
     
   self.navigationItem.prompt = currentPath;  
 
   [prevPath release];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+  if(buttonIndex == 1)
+  {
+    // Yes
+    [self searchButtonClicked];
+  }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -285,7 +335,7 @@ static const int section_offset = 0;
 	return YES;
 }
 */
-
+/*
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
 }
@@ -299,7 +349,7 @@ static const int section_offset = 0;
 
 - (void)viewDidDisappear:(BOOL)animated {
 }
-
+*/
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	// Return YES for supported orientations
